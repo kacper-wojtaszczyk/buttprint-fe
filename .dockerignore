@@ -1,0 +1,10 @@
+node_modules
+build
+.git
+.gitignore
+.svelte-kit
+.idea
+.vscode
+.claude
+.DS_Store
+*.md

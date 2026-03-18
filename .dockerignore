@@ -8,3 +8,7 @@ build
 .claude
 .DS_Store
 *.md
+.env
+.env.*
+!.env.example
+!.env.test

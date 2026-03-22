@@ -1,0 +1,21 @@
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    groups:
+      npm-major-minor:
+        update-types: ['major', 'minor']
+      npm-patch:
+        update-types: ['patch']
+
+  - package-ecosystem: 'docker'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    groups:
+      docker-major-minor:
+        update-types: ['major', 'minor']
+      docker-patch:
+        update-types: ['patch']

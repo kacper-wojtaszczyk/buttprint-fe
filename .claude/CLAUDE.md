@@ -4,7 +4,7 @@ This file provides guidance to Claude Code when working in the Buttprint FE repo
 
 ## What This Is
 
-SvelteKit + TypeScript application. The visual layer of [Buttprint](../docs/buttprint.md). A thin display layer — no environmental data processing, no scoring, no SVG generation:
+SvelteKit + TypeScript application. The visual layer of Buttprint. A thin display layer — no environmental data processing, no scoring, no SVG generation:
 
 ```
 Browser (this) → Buttprint API (Go, public) → Jackfruit (Go, private)
@@ -12,12 +12,10 @@ Browser (this) → Buttprint API (Go, public) → Jackfruit (Go, private)
 
 Gathers user input (location + time), calls Buttprint API, displays the returned SVG and metadata, handles URL routing for shareability.
 
-**Full spec:** [docs/buttprint-fe-spec.md](../docs/buttprint-fe-spec.md)
 
 ## Commands
 
 ```bash
-# (stubs — fill in after scaffolding with `npm create svelte@latest`)
 npm install           # Install dependencies
 npm run dev           # Dev server with hot reload (Vite)
 npm run build         # Production build
@@ -75,7 +73,7 @@ src/
 
 - Strict TypeScript — type the API response structure, no `any`
 - `<script lang="ts">` in all Svelte components
-- Reactive declarations (`$:`) for derived state
+- Svelte 5 runes: `$state()` for reactive state, `$derived()` for derived state
 - SvelteKit `load` functions return typed objects consumed by `+page.svelte`
 - Plain CSS with CSS custom properties for theming
 - Respect Svelte's scoped styles — don't use global selectors to reach into child components

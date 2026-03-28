@@ -12,7 +12,6 @@ Browser (this) → Buttprint API (Go, public) → Jackfruit (Go, private)
 
 Gathers user input (location + time), calls Buttprint API, displays the returned SVG and metadata, handles URL routing for shareability.
 
-
 ## Commands
 
 ```bash

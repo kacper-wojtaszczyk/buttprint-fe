@@ -1,24 +1,27 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 	import { env } from '$env/dynamic/public';
 	import { fetchButtprint } from '$lib/api';
-	import type { ButtprintResponse } from '$lib/types';
-	import ButtDisplay from '$lib/components/ButtDisplay.svelte';
-	import DataReadout from '$lib/components/DataReadout.svelte';
 
 	const API_URL = env.PUBLIC_BUTTPRINT_API_URL ?? 'https://api.buttprint.eu';
 
-	let data = $state<ButtprintResponse | null>(null);
-	let loading = $state(true);
 	let error = $state<string | null>(null);
 
 	onMount(async () => {
 		try {
-			data = await fetchButtprint(API_URL);
+			const result = await fetchButtprint(API_URL);
+
+			const { lat, lon } = result.location;
+			const locationPath = `${lat},${lon}`;
+
+			await goto(resolve(`/${locationPath}`), {
+				replaceState: true,
+				state: { prefetched: result }
+			});
 		} catch (err) {
 			error = err instanceof Error ? err.message : 'An unexpected error occurred';
-		} finally {
-			loading = false;
 		}
 	});
 </script>
@@ -29,15 +32,10 @@
 </svelte:head>
 
 <div class="page">
-	<h1>Buttprint</h1>
-
-	{#if loading}
-		<p class="status">Loading your buttprint…</p>
-	{:else if error}
+	{#if error}
 		<p class="status error">{error}</p>
-	{:else if data}
-		<ButtDisplay svg={data.svg} />
-		<DataReadout variables={data.variables} />
+	{:else}
+		<p class="status">Finding your buttprint…</p>
 	{/if}
 </div>
 
@@ -46,23 +44,13 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		justify-content: center;
 		min-height: 100vh;
 		padding: 2rem 1rem;
 	}
 
-	h1 {
-		margin-top: 8vh;
-		margin-bottom: 2rem;
-		text-align: center;
-		font-size: 3rem;
-		font-weight: 300;
-		letter-spacing: 0.1em;
-		text-transform: uppercase;
-	}
-
 	.status {
 		color: var(--text-muted);
-		margin-top: 4rem;
 	}
 
 	.error {

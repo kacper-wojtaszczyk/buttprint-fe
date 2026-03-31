@@ -76,3 +76,12 @@ src/
 - SvelteKit `load` functions return typed objects consumed by `+page.svelte`
 - Plain CSS with CSS custom properties for theming
 - Respect Svelte's scoped styles — don't use global selectors to reach into child components
+
+## Code Review
+
+When reviewing PRs (automated or `@claude`-triggered):
+
+- **Flag** broken reactivity (mutations without reassignment), `any` types, untyped API responses, RFC 3339 violations, client/server load boundary leaks, XSS via raw SVG/HTML
+- **Skip** formatting, import order, and pre-existing debt — linters handle the first two
+- **Verify** with `npx svelte-check`, `npm run test`, `npm run lint` before posting findings
+- **Severity tags:** 🔴 must-fix, 🟡 nit, 🟣 pre-existing

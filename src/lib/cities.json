@@ -13,6 +13,7 @@
 	{ "slug": "budapest", "name": "Budapest", "lat": 47.5, "lon": 19.04 },
 	{ "slug": "chisinau", "name": "Chișinău", "lat": 47.01, "lon": 28.86 },
 	{ "slug": "copenhagen", "name": "Copenhagen", "lat": 55.68, "lon": 12.57 },
+	{ "slug": "cracow", "name": "Cracow", "lat": 50.06, "lon": 19.95 },
 	{ "slug": "dublin", "name": "Dublin", "lat": 53.35, "lon": -6.26 },
 	{ "slug": "hamburg", "name": "Hamburg", "lat": 53.55, "lon": 9.99 },
 	{ "slug": "helsinki", "name": "Helsinki", "lat": 60.17, "lon": 24.94 },

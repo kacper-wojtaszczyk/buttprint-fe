@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { parseLocation } from './location';
+import { parseLocation, findNearestCity } from './location';
 
 describe('parseLocation', () => {
 	it('resolves a known city slug', () => {
@@ -38,5 +38,30 @@ describe('parseLocation', () => {
 		expect(parseLocation('91,0')).toBeNull();
 		expect(parseLocation('0,181')).toBeNull();
 		expect(parseLocation('-91,0')).toBeNull();
+	});
+});
+
+describe('findNearestCity', () => {
+	it('returns exact city match', () => {
+		const result = findNearestCity(51.92, 4.48);
+		expect(result).not.toBeNull();
+		expect(result!.slug).toBe('rotterdam');
+	});
+
+	it('returns nearest city for nearby coords', () => {
+		const result = findNearestCity(51.95, 4.5);
+		expect(result).not.toBeNull();
+		expect(result!.slug).toBe('rotterdam');
+	});
+
+	it('returns null when far from any city', () => {
+		const result = findNearestCity(0, 0);
+		expect(result).toBeNull();
+	});
+
+	it('returns the closer of two nearby cities', () => {
+		const result = findNearestCity(52.08, 4.3);
+		expect(result).not.toBeNull();
+		expect(result!.slug).toBe('the-hague');
 	});
 });

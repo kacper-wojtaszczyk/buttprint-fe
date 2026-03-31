@@ -3,6 +3,7 @@
 </script>
 
 <div class="gallery-frame">
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -- SVG from trusted buttprint-api -->
 	{@html svg}
 </div>
 

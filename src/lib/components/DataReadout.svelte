@@ -17,7 +17,7 @@
 </script>
 
 <div class="readout">
-	{#each variables as variable}
+	{#each variables as variable (variable.name)}
 		<div class="variable">
 			<span class="label">{displayName(variable.name)}:</span>
 			<span class="value">{variable.value.toFixed(1)} {variable.unit}</span>

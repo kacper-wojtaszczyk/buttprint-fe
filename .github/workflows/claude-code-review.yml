@@ -36,6 +36,7 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           classify_inline_comments: 'true'
           include_fix_links: 'true'
+          show_full_output: 'true'
           prompt: |
             Review this pull request thoroughly. This is a SvelteKit + TypeScript application
             (Svelte 5 with runes, Vite, Node adapter for SSR).
@@ -89,4 +90,4 @@ jobs:
           claude_args: |
             --model claude-opus-4-6
             --max-turns 12
-            --allowedTools "Read,Grep,Glob,Bash(npx svelte-check:*),Bash(npm run test:*),Bash(npm run lint:*),Bash(npm run build:*),Bash(gh pr diff:*),Bash(gh pr view:*),mcp__github_inline_comment__create_inline_comment"
+            --allowedTools "Read,Grep,Glob,Bash(npx svelte-check:*),Bash(npm run test:*),Bash(npm run lint:*),Bash(npm run build:*),Bash(gh pr:*),mcp__github_inline_comment__create_inline_comment"

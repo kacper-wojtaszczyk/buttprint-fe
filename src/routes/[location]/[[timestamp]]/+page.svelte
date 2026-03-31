@@ -1,10 +1,14 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 	import { env } from '$env/dynamic/public';
 	import { fetchButtprint } from '$lib/api';
 	import type { ButtprintResponse } from '$lib/types';
+	import type { City } from '$lib/location';
 	import type { PageProps } from './$types';
 	import ButtDisplay from '$lib/components/ButtDisplay.svelte';
+	import CityPicker from '$lib/components/CityPicker.svelte';
 	import DataReadout from '$lib/components/DataReadout.svelte';
 
 	let { data }: PageProps = $props();
@@ -52,6 +56,10 @@
 			cancelled = true;
 		};
 	});
+
+	function handleCitySelect(city: City): void {
+		goto(resolve(`/${city.slug}`));
+	}
 </script>
 
 <svelte:head>
@@ -68,6 +76,7 @@
 		<p class="status error">{error}</p>
 	{:else if buttprint}
 		<ButtDisplay svg={buttprint.svg} />
+		<CityPicker location={data.location} onSelect={handleCitySelect} />
 		<DataReadout variables={buttprint.variables} />
 	{/if}
 </div>

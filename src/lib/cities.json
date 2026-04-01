@@ -48,6 +48,7 @@
 	{ "slug": "tallinn", "name": "Tallinn", "lat": 59.44, "lon": 24.75 },
 	{ "slug": "the-hague", "name": "The Hague", "lat": 52.08, "lon": 4.3 },
 	{ "slug": "tirana", "name": "Tirana", "lat": 41.33, "lon": 19.82 },
+	{ "slug": "tomaszow-mazowiecki", "name": "Tomaszów Mazowiecki", "lat": 51.53, "lon": 20.01 },
 	{ "slug": "vaduz", "name": "Vaduz", "lat": 47.14, "lon": 9.52 },
 	{ "slug": "valletta", "name": "Valletta", "lat": 35.9, "lon": 14.51 },
 	{ "slug": "vienna", "name": "Vienna", "lat": 48.21, "lon": 16.37 },

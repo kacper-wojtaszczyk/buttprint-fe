@@ -5,6 +5,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
 env:
   REGISTRY: rg.nl-ams.scw.cloud/climacterium
 
@@ -46,9 +50,11 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Configure kubeconfig
+        env:
+          KUBECONFIG_CONTENT: ${{ secrets.KUBECONFIG }}
         run: |
           mkdir -p ~/.kube
-          echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
+          printenv KUBECONFIG_CONTENT > ~/.kube/config
           chmod 600 ~/.kube/config
 
       - name: Deploy to Kapsule

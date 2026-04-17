@@ -58,8 +58,9 @@ jobs:
           chmod 600 ~/.kube/config
 
       - name: Deploy to Kapsule
+        env:
+          SHA: ${{ steps.vars.outputs.sha_short }}
         run: |
-          SHA=${{ steps.vars.outputs.sha_short }}
           kubectl set image deployment/buttprint-fe \
             buttprint-fe=${{ env.REGISTRY }}/buttprint-fe:${SHA}
 

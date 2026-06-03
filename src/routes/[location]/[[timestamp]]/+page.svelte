@@ -10,6 +10,7 @@
 	import ButtDisplay from '$lib/components/ButtDisplay.svelte';
 	import CityPicker from '$lib/components/CityPicker.svelte';
 	import DataReadout from '$lib/components/DataReadout.svelte';
+	import TimePicker from '$lib/components/TimePicker.svelte';
 
 	let { data }: PageProps = $props();
 
@@ -60,6 +61,14 @@
 	function handleCitySelect(city: City): void {
 		goto(resolve(`/${city.slug}`));
 	}
+
+	function handleTimeSelect(timestamp: string) {
+		goto(resolve(`/${page.params.location}/${timestamp}`));
+	}
+
+	function handleLive() {
+		goto(resolve(`/${page.params.location}`));
+	}
 </script>
 
 <svelte:head>
@@ -77,6 +86,7 @@
 	{:else if buttprint}
 		<ButtDisplay svg={buttprint.svg} />
 		<CityPicker location={data.location} onSelect={handleCitySelect} />
+		<TimePicker timestamp={data.timestamp} onSelect={handleTimeSelect} onLive={handleLive} />
 		<DataReadout variables={buttprint.variables} />
 	{/if}
 </div>

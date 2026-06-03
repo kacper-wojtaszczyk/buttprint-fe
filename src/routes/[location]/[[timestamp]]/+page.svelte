@@ -59,7 +59,8 @@
 	});
 
 	function handleCitySelect(city: City): void {
-		goto(resolve(`/${city.slug}`));
+		const timestamp = page.params.timestamp;
+		goto(resolve(timestamp ? `/${city.slug}/${timestamp}` : `/${city.slug}`));
 	}
 
 	function handleTimeSelect(timestamp: string) {

@@ -11,6 +11,7 @@
 	import CityPicker from '$lib/components/CityPicker.svelte';
 	import DataReadout from '$lib/components/DataReadout.svelte';
 	import TimePicker from '$lib/components/TimePicker.svelte';
+	import BackHome from '$lib/components/BackHome.svelte';
 
 	let { data }: PageProps = $props();
 
@@ -84,6 +85,7 @@
 		<p class="status">Loading your buttprint…</p>
 	{:else if error}
 		<p class="status error">{error}</p>
+		<BackHome />
 	{:else if buttprint}
 		<ButtDisplay svg={buttprint.svg} />
 		<CityPicker location={data.location} onSelect={handleCitySelect} />

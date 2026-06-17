@@ -11,7 +11,7 @@
 	import CityPicker from '$lib/components/CityPicker.svelte';
 	import DataReadout from '$lib/components/DataReadout.svelte';
 	import TimePicker from '$lib/components/TimePicker.svelte';
-	import BackHome from '$lib/components/BackHome.svelte';
+	import ErrorState from '$lib/components/ErrorState.svelte';
 
 	let { data }: PageProps = $props();
 
@@ -78,21 +78,22 @@
 	<meta name="description" content="How thicc does the air feel? The buttprint shows you." />
 </svelte:head>
 
-<div class="page">
-	<h1>Buttprint</h1>
+{#if error}
+	<ErrorState message={error} />
+{:else}
+	<div class="page">
+		<h1>Buttprint</h1>
 
-	{#if loading}
-		<p class="status">Loading your buttprint…</p>
-	{:else if error}
-		<p class="status error">{error}</p>
-		<BackHome />
-	{:else if buttprint}
-		<ButtDisplay svg={buttprint.svg} />
-		<CityPicker location={data.location} onSelect={handleCitySelect} />
-		<TimePicker timestamp={data.timestamp} onSelect={handleTimeSelect} onLive={handleLive} />
-		<DataReadout variables={buttprint.variables} />
-	{/if}
-</div>
+		{#if loading}
+			<p class="status">Loading your buttprint…</p>
+		{:else if buttprint}
+			<ButtDisplay svg={buttprint.svg} />
+			<CityPicker location={data.location} onSelect={handleCitySelect} />
+			<TimePicker timestamp={data.timestamp} onSelect={handleTimeSelect} onLive={handleLive} />
+			<DataReadout variables={buttprint.variables} />
+		{/if}
+	</div>
+{/if}
 
 <style>
 	.page {
@@ -116,9 +117,5 @@
 	.status {
 		color: var(--text-muted);
 		margin-top: 4rem;
-	}
-
-	.error {
-		color: #c47272;
 	}
 </style>
